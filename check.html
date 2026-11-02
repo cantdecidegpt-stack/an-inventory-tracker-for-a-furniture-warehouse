@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inventory Tracker For A Furniture Wareho — live delivery check</title>
+<style>
+  :root{--bg:#08080a;--panel:#0f0f13;--line:#23232b;--text:#f4f4f6;--muted:#a2a2ad;--red:#e11d2e;--ok:#2fbf71}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;color:var(--text);
+    background:radial-gradient(80% 60% at 50% -10%,rgba(225,29,46,.18),transparent 60%),var(--bg);
+    font-family:"Segoe UI",Inter,system-ui,sans-serif}
+  .card{width:100%;max-width:600px;background:var(--panel);border:1px solid var(--line);border-radius:18px;
+    padding:28px;box-shadow:0 30px 80px -40px rgba(0,0,0,.9)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:14px;margin-bottom:22px}
+  .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,var(--red),#7c0b16);
+    display:grid;place-items:center;font-size:12px;font-weight:900}
+  h1{margin:0 0 6px;font-size:22px;letter-spacing:-.02em}
+  p.sub{margin:0 0 22px;color:var(--muted);font-size:13.5px}
+  .verdict{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;
+    border:1px solid var(--line);background:#0b0b0e;margin-bottom:18px}
+  .pill{width:10px;height:10px;border-radius:50%;background:var(--muted);flex:none}
+  .pill.ok{background:var(--ok);box-shadow:0 0 0 4px rgba(47,191,113,.15)}
+  .pill.bad{background:var(--red);box-shadow:0 0 0 4px rgba(225,29,46,.18)}
+  .verdict b{font-size:14px}
+  .verdict span{display:block;color:var(--muted);font-size:12px}
+  dl{display:grid;grid-template-columns:150px 1fr;gap:10px 16px;margin:0;font-size:13px}
+  dt{color:var(--muted);font-size:12px}
+  dd{margin:0;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;word-break:break-all}
+  .actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  a.btn{display:inline-flex;padding:10px 16px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:700;
+    background:var(--red);color:#fff}
+  a.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  .foot{margin-top:20px;color:var(--muted);font-size:11.5px;border-top:1px solid var(--line);padding-top:14px}
+  .files{margin-top:16px;font-family:ui-monospace,Consolas,monospace;font-size:11.5px;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:6px 14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand"><span class="mark">BL</span> BotLancer delivery check</div>
+  <h1 id="name">Inventory Tracker For A Furniture Wareho</h1>
+  <p class="sub" id="sub">Verifying this live build in your browser.</p>
+
+  <div class="verdict">
+    <span class="pill" id="pill"></span>
+    <div>
+      <b id="verdict">Checking</b>
+      <span id="verdict-sub">Running a live check against this domain</span>
+    </div>
+  </div>
+
+  <dl>
+    <dt>Build</dt><dd>b50628d6 · data</dd>
+    <dt>Checked</dt><dd id="at">—</dd>
+    <dt>HTTP</dt><dd id="http">—</dd>
+    <dt>Response time</dt><dd id="ms">—</dd>
+    <dt>Page size</dt><dd id="bytes">—</dd>
+    <dt>Files present</dt><dd id="files">—</dd>
+    <dt>Total size</dt><dd>39.6 KB</dd>
+  </dl>
+
+  <div class="actions">
+    <a class="btn" href="./index.html">Open the site</a>
+    <a class="btn ghost" href="./app.html">Open the live app</a>
+    <a class="btn ghost" href="#" id="recheck">Run check again</a>
+  </div>
+
+  <div class="files" id="file-list"></div>
+  <div class="foot">This page fetches the build from this domain every time it loads. If it says healthy, the files are being served right now.</div>
+</div>
+
+<script>
+(function(){
+  var FILES = ["app.js","styles.css","content.json","app.html","data-app.js","data.json","index.html","README.md","site.json"];
+  var $ = function(s){ return document.querySelector(s); };
+  var set = function(s, v){ var el = $(s); if (el) el.textContent = v; };
+
+  async function check(){
+    set('#verdict', 'Checking');
+    $('#pill').className = 'pill';
+    set('#verdict-sub', 'Running a live check against this domain');
+    var started = performance.now();
+    try {
+      var res = await fetch('./index.html?check=' + Date.now(), { cache: 'no-store' });
+      var ms = Math.round(performance.now() - started);
+      var body = await res.text();
+      set('#at', new Date().toLocaleString());
+      set('#http', 'HTTP ' + res.status);
+      set('#ms', ms + ' ms');
+      set('#bytes', body.length.toLocaleString('en-US') + ' bytes');
+
+      var present = 0;
+      var list = [];
+      await Promise.all(FILES.map(async function(path){
+        try {
+          var r = await fetch('./' + path + '?check=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
+          if (r.ok) present++;
+          list.push((r.ok ? '✓ ' : '✕ ') + path);
+        } catch (e) {
+          list.push('✕ ' + path);
+        }
+      }));
+      list.sort();
+      $('#file-list').textContent = list.join('   ');
+      set('#files', present + ' / ' + FILES.length);
+
+      var ok = res.ok && present === FILES.length;
+      $('#pill').className = 'pill ' + (ok ? 'ok' : 'bad');
+      set('#verdict', ok ? 'Healthy — this build is live' : 'Needs attention');
+      set('#verdict-sub', ok
+        ? 'All files respond on this domain right now.'
+        : 'Some files did not respond. Reload or contact the sender.');
+      set('#sub', ok ? 'This delivery is live and verified from your browser.' : 'This delivery needs attention.');
+    } catch (err) {
+      $('#pill').className = 'pill bad';
+      set('#verdict', 'Check failed');
+      set('#verdict-sub', String(err && err.message || err));
+    }
+  }
+
+  $('#recheck').addEventListener('click', function(e){ e.preventDefault(); check(); });
+  check();
+})();
+</script>
+</body>
+</html>

@@ -39,9 +39,9 @@
   }
   function statusClass(v){
     var s = String(v || '').toLowerCase();
-    if(/(done|paid|closed|complete|won|delivered|active|approved)/.test(s)) return 'ok';
-    if(/(pending|review|waiting|hold|draft|new)/.test(s)) return 'warn';
-    if(/(blocked|lost|cancelled|overdue|failed|risk)/.test(s)) return 'bad';
+    if(/(done|paid|closed|complete|won|delivered|active|approved|confirmed|in stock)/.test(s)) return 'ok';
+    if(/(pending|review|waiting|hold|draft|new|low|ordered|booked)/.test(s)) return 'warn';
+    if(/\b(blocked|lost|cancelled|overdue|failed|risk|out|no-show)\b/.test(s)) return 'bad';
     return '';
   }
   function statuses(){
@@ -73,16 +73,20 @@
   }
   function renderKpis(){
     var rows = state.rows;
-    var open = rows.filter(function(r){ return !/(done|paid|closed|complete|won|delivered)/i.test(String(r.status || '')); }).length;
+    var done = rows.filter(function(r){ return /(done|paid|closed|complete|won|delivered|confirmed|in stock)/i.test(String(r.status || '')); }).length;
+    var open = rows.length - done;
+    var risk = rows.filter(function(r){ return /\b(low|out|blocked|lost|cancelled|overdue|failed|risk|no-show)\b/i.test(String(r.status || '')); }).length;
     var valueKey = COLS.filter(function(c){ return c.type === 'number'; })[0];
     var total = valueKey ? rows.reduce(function(a, r){ return a + (Number(r[valueKey.key]) || 0); }, 0) : 0;
-    var done = rows.length - open;
+    var isMoney = valueKey && /(value|price|amount|revenue|cost|budget|total|fee|salary)/i.test(valueKey.key + ' ' + valueKey.label);
     var pct = rows.length ? Math.round((done / rows.length) * 100) : 0;
     var items = [
       { label: 'Records', value: rows.length.toLocaleString('en-US') },
       { label: 'Open', value: open.toLocaleString('en-US') },
-      valueKey ? { label: valueKey.label, value: money(total) } : { label: 'Complete', value: pct + '%' },
-      { label: 'Complete', value: pct + '%' }
+      valueKey
+        ? { label: valueKey.label, value: isMoney ? money(total) : total.toLocaleString('en-US') }
+        : { label: 'Complete', value: pct + '%' },
+      { label: 'At risk', value: risk.toLocaleString('en-US') }
     ];
     document.getElementById('kpis').innerHTML = items.map(function(i){
       return '<div class="kpi"><span>' + i.label + '</span><b>' + i.value + '</b></div>';
