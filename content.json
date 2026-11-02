@@ -1,0 +1,100 @@
+{
+  "id": "b50628d6-42dd-486c-b1a9-6d5d6f8be215",
+  "brand": "Inventory Tracker For A Furniture Wareho",
+  "mode": "data",
+  "category": "Data Board",
+  "headline": "Inventory Tracker For A Furniture Wareho — every record in one clear board.",
+  "sub": "an inventory tracker for a furniture warehouse",
+  "outcome": "one live source of truth",
+  "outcomeSub": "A real, working interface on top of your data. Nothing decorative, nothing you have to maintain.",
+  "services": [
+    {
+      "icon": "01",
+      "title": "Live board",
+      "body": "Every record, status and total rendered from your real data."
+    },
+    {
+      "icon": "02",
+      "title": "Data pipeline",
+      "body": "Imports, validation and scheduled refresh without spreadsheets."
+    },
+    {
+      "icon": "03",
+      "title": "Exports",
+      "body": "Board-ready CSV and one-click sharing for the whole team."
+    }
+  ],
+  "included": [
+    "Live records board",
+    "Search, filter and sort",
+    "Add, edit and remove rows",
+    "Totals computed from data",
+    "CSV export",
+    "Mobile and desktop layouts",
+    "Local persistence",
+    "No dependency on a paid service"
+  ],
+  "tiers": [
+    {
+      "name": "Launch",
+      "price": "$10,000",
+      "note": "one-off build",
+      "features": [
+        "Single-page site",
+        "Mobile + desktop",
+        "Copy polish",
+        "Live check link",
+        "14-day support"
+      ],
+      "featured": false
+    },
+    {
+      "name": "Growth",
+      "price": "$18,000",
+      "note": "build + retainer",
+      "features": [
+        "Multi-page site",
+        "Booking / contact flow",
+        "Analytics wiring",
+        "Monthly improvements",
+        "Priority support"
+      ],
+      "featured": true
+    },
+    {
+      "name": "Operator",
+      "price": "$30,000",
+      "note": "full system",
+      "features": [
+        "Custom workflows",
+        "Data dashboards",
+        "Automation + approvals",
+        "Quarterly roadmap",
+        "Dedicated channel"
+      ],
+      "featured": false
+    }
+  ],
+  "faq": [
+    [
+      "Where does the data live?",
+      "The board ships with sample data and saves your edits locally in the browser. Connect any API or database later without changing the interface."
+    ],
+    [
+      "Can the team use it today?",
+      "Yes. It is a static app: open it, add records, export CSV. No install and no account."
+    ],
+    [
+      "Can we own it?",
+      "You own the code and the data. There is no lock-in and no recurring platform fee."
+    ],
+    [
+      "How are changes made?",
+      "Edit the files or ask BotLancer to rebuild a section. Every delivery carries a check link."
+    ]
+  ],
+  "email": "hello@inventorytrackerforafurniturewareho.com",
+  "leadId": null,
+  "value": 10000,
+  "generatedAt": "2026-11-02T08:31:17.435Z"
+}

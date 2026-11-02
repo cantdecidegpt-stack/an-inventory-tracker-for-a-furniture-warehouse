@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-botlancer-site="b50628d6-42dd-486c-b1a9-6d5d6f8be215" data-mode="data">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inventory Tracker For A Furniture Wareho — Data Board</title>
+<meta name="description" content="Inventory Tracker For A Furniture Wareho — every record in one clear board.">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body class="app-body">
+<div class="app-top">
+  <div class="left">
+    <span class="mark">I</span>
+    <div>
+      <div style="font-weight:800;font-size:14px">Inventory Tracker For A Furniture Wareho</div>
+      <div style="color:var(--dim);font-size:11px">Live data board</div>
+    </div>
+  </div>
+  <div class="app-actions">
+    <a class="back" href="./index.html">← Back to site</a>
+    <button class="btn btn-ghost" id="export-btn" type="button">Export CSV</button>
+    <button class="btn btn-primary" id="add-btn" type="button">Add record</button>
+  </div>
+</div>
+
+<main class="app-main">
+  <div class="banner" id="banner">Sample data is loaded. Edit any cell, add rows, or clear the board — changes save in this browser.</div>
+
+  <div class="app-head">
+    <div>
+      <h1>Data Board board</h1>
+      <p>Inventory Tracker For A Furniture Wareho — every record in one clear board.</p>
+    </div>
+    <div class="app-actions">
+      <span class="pill" id="saved-pill">saved locally</span>
+      <button class="btn btn-ghost" id="reset-btn" type="button">Reset sample</button>
+    </div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="app-toolbar">
+    <input type="search" id="search" placeholder="Search records…" aria-label="Search records">
+    <select id="status-filter" aria-label="Filter by status"></select>
+    <select id="sort-select" aria-label="Sort records"></select>
+    <span class="spacer"></span>
+    <span class="pill" id="count-pill">0 records</span>
+  </div>
+
+  <div class="board">
+    <table class="data" id="table">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="app-foot">
+    <span>Stored as JSON in this browser. Export CSV to move it anywhere.</span>
+    <span>Built with BotLancer</span>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+<script>
+window.__BL_COLUMNS__ = [{"key":"item","label":"Item","type":"text"},{"key":"sku","label":"SKU","type":"text"},{"key":"stock","label":"Stock","type":"number"},{"key":"reorder","label":"Reorder at","type":"number"},{"key":"supplier","label":"Supplier","type":"text"},{"key":"status","label":"Status","type":"select"}];
+window.__BL_DATA__ = {"rows":[{"item":"Desk lamp","sku":"LMP-101","stock":42,"reorder":10,"supplier":"Aster Supply","status":"In stock","id":1},{"item":"Oak chair","sku":"CHR-204","stock":8,"reorder":12,"supplier":"Beacon Works","status":"Low","id":2},{"item":"Monitor arm","sku":"ARM-330","stock":0,"reorder":6,"supplier":"Aster Supply","status":"Out","id":3},{"item":"Cable kit","sku":"CBL-012","stock":120,"reorder":25,"supplier":"Northline","status":"In stock","id":4},{"item":"Shelf unit","sku":"SHF-077","stock":16,"reorder":8,"supplier":"Beacon Works","status":"In stock","id":5},{"item":"Foot rest","sku":"FTR-055","stock":5,"reorder":10,"supplier":"Northline","status":"Ordered","id":6},{"item":"Waste bin","sku":"BIN-019","stock":64,"reorder":20,"supplier":"Aster Supply","status":"In stock","id":7},{"item":"Whiteboard","sku":"WBD-140","stock":3,"reorder":5,"supplier":"Beacon Works","status":"Low","id":8},{"item":"Pen pack","sku":"PEN-500","stock":240,"reorder":50,"supplier":"Northline","status":"In stock","id":9},{"item":"Laptop stand","sku":"STD-222","stock":21,"reorder":8,"supplier":"Aster Supply","status":"In stock","id":10}],"columns":[{"key":"item","label":"Item","type":"text"},{"key":"sku","label":"SKU","type":"text"},{"key":"stock","label":"Stock","type":"number"},{"key":"reorder","label":"Reorder at","type":"number"},{"key":"supplier","label":"Supplier","type":"text"},{"key":"status","label":"Status","type":"select"}],"statuses":["In stock","Low","Out","Ordered","Archived"]};
+window.__BL_KEY__ = 'botlancer:data:b50628d6-42dd-486c-b1a9-6d5d6f8be215';
+</script>
+<script src="./data-app.js"></script>
+</body>
+</html>
