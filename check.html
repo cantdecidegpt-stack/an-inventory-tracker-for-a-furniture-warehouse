@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Inventory Tracker For A Furniture Wareho — live delivery check</title>
+<meta name="description" content="Live delivery check for Inventory Tracker For A Furniture Wareho. Verifies that every file in this build is served from this domain right now.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#08080a">
 <style>
   :root{--bg:#08080a;--panel:#0f0f13;--line:#23232b;--text:#f4f4f6;--muted:#a2a2ad;--red:#e11d2e;--ok:#2fbf71}
   *{box-sizing:border-box}
@@ -37,12 +40,12 @@
 </style>
 </head>
 <body>
-<div class="card">
+<main class="card">
   <div class="brand"><span class="mark">BL</span> BotLancer delivery check</div>
   <h1 id="name">Inventory Tracker For A Furniture Wareho</h1>
   <p class="sub" id="sub">Verifying this live build in your browser.</p>
 
-  <div class="verdict">
+  <div class="verdict" role="status" aria-live="polite">
     <span class="pill" id="pill"></span>
     <div>
       <b id="verdict">Checking</b>
@@ -66,9 +69,9 @@
     <a class="btn ghost" href="#" id="recheck">Run check again</a>
   </div>
 
-  <div class="files" id="file-list"></div>
+  <div class="files" id="file-list" aria-live="polite"></div>
   <div class="foot">This page fetches the build from this domain every time it loads. If it says healthy, the files are being served right now.</div>
-</div>
+</main>
 
 <script>
 (function(){
