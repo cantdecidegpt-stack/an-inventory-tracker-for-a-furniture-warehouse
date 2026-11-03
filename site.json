@@ -4,7 +4,53 @@
   "mode": "data",
   "category": "Data Board",
   "headline": "Inventory Tracker For A Furniture Wareho — every record in one clear board.",
+  "design": {
+    "archetype": "obsidian",
+    "summary": "restrained dark operator site with precise edge lighting",
+    "variant": "v2"
+  },
+  "valueStack": {
+    "total": 31300,
+    "deal": 10000
+  },
+  "automations": [
+    {
+      "id": "lead-draft",
+      "name": "Enquiry → Gmail draft",
+      "mode": "demo"
+    },
+    {
+      "id": "triage",
+      "name": "Lead triage",
+      "mode": "demo"
+    },
+    {
+      "id": "follow-up",
+      "name": "Follow-up sequence",
+      "mode": "demo"
+    },
+    {
+      "id": "weekly-report",
+      "name": "Weekly operator report",
+      "mode": "production"
+    },
+    {
+      "id": "uptime",
+      "name": "Live delivery check",
+      "mode": "production"
+    },
+    {
+      "id": "backup",
+      "name": "Data snapshot",
+      "mode": "production"
+    },
+    {
+      "id": "stock-alert",
+      "name": "Threshold alert",
+      "mode": "demo"
+    }
+  ],
   "leadId": null,
   "value": 10000,
-  "generatedAt": "2026-11-02T09:00:26.027Z"
+  "generatedAt": "2026-11-03T06:02:24.105Z"
 }

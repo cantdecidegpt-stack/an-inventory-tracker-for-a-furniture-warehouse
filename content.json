@@ -94,7 +94,130 @@
     ]
   ],
   "email": "hello@inventorytrackerforafurniturewareho.com",
+  "design": {
+    "archetype": "obsidian",
+    "summary": "restrained dark operator site with precise edge lighting",
+    "typeLabel": "neutral sans, tight display headings",
+    "layoutLabel": "left-aligned hero, dense outcome sections",
+    "signature": "thin rules, red edge light, compact proof blocks",
+    "display": "\"Segoe UI\",Inter,system-ui,-apple-system,sans-serif",
+    "body": "\"Segoe UI\",Inter,system-ui,-apple-system,sans-serif",
+    "radius": "16px",
+    "heroAlign": "left",
+    "weight": "800",
+    "transform": "none",
+    "motif": "spotlight",
+    "accent": "#e11d2e",
+    "accentSoft": "#ff3b4e",
+    "heroSize": "clamp(42px,6.4vw,76px)",
+    "sectionGap": "72px",
+    "variant": "v2"
+  },
+  "proof": {
+    "text": "No client results are claimed here. The board below is a working sample, clearly labelled, so you can test the behaviour before connecting real data.",
+    "label": "Sample work — not a client result"
+  },
+  "valueStack": {
+    "items": [
+      {
+        "item": "Discovery, positioning and message hierarchy",
+        "value": 3200
+      },
+      {
+        "item": "Bespoke visual system and responsive build",
+        "value": 6800
+      },
+      {
+        "item": "Conversion page with SEO, schema and accessibility",
+        "value": 4500
+      },
+      {
+        "item": "Working data board: search, edit, filter, export",
+        "value": 6200
+      },
+      {
+        "item": "Gmail + data setup modal and production runbook",
+        "value": 2800
+      },
+      {
+        "item": "Automation pack with human-approval guardrails",
+        "value": 5400
+      },
+      {
+        "item": "Delivery QA, public check page and handover",
+        "value": 2400
+      }
+    ],
+    "total": 31300,
+    "deal": 10000
+  },
+  "automations": [
+    {
+      "id": "lead-draft",
+      "name": "Enquiry → Gmail draft",
+      "trigger": "A visitor submits the site form",
+      "action": "Summarise the enquiry and create a Gmail draft reply with the next step.",
+      "guard": "Draft only. You read it, edit it, and press send.",
+      "mode": "demo",
+      "status": "ready"
+    },
+    {
+      "id": "triage",
+      "name": "Lead triage",
+      "trigger": "New enquiry arrives",
+      "action": "Score fit, tag the request, and write the record into the data board.",
+      "guard": "No record is deleted; every change is logged.",
+      "mode": "demo",
+      "status": "ready"
+    },
+    {
+      "id": "follow-up",
+      "name": "Follow-up sequence",
+      "trigger": "No reply after 2, 5 and 9 days",
+      "action": "Prepare three short follow-up drafts with the original context attached.",
+      "guard": "You approve each draft. The sequence stops the moment the client replies.",
+      "mode": "demo",
+      "status": "ready"
+    },
+    {
+      "id": "weekly-report",
+      "name": "Weekly operator report",
+      "trigger": "Every Monday, 08:00",
+      "action": "Summarise enquiries, bookings, failed checks and open follow-ups into one message.",
+      "guard": "Internal message to you only.",
+      "mode": "production",
+      "status": "ready"
+    },
+    {
+      "id": "uptime",
+      "name": "Live delivery check",
+      "trigger": "Every 12 hours",
+      "action": "Fetch the live site and every asset, then record HTTP status and response time.",
+      "guard": "Read-only. Alerts on failure; never changes the site.",
+      "mode": "production",
+      "status": "ready"
+    },
+    {
+      "id": "backup",
+      "name": "Data snapshot",
+      "trigger": "Every Sunday, 02:00",
+      "action": "Export the current board to a dated CSV so nothing lives in one place.",
+      "guard": "Local file only. No third-party upload.",
+      "mode": "production",
+      "status": "ready"
+    },
+    {
+      "id": "stock-alert",
+      "name": "Threshold alert",
+      "trigger": "A tracked number crosses its limit",
+      "action": "Flag the row, write a note, and prepare an internal alert.",
+      "guard": "Internal alert only. No supplier is contacted automatically.",
+      "mode": "demo",
+      "status": "ready"
+    }
+  ],
+  "answers": [],
   "leadId": null,
   "value": 10000,
-  "generatedAt": "2026-11-02T09:00:26.027Z"
+  "generatedAt": "2026-11-03T06:02:24.105Z"
 }

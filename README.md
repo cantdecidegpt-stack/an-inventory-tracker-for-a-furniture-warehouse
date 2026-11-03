@@ -8,6 +8,8 @@ A static marketing site plus a working data board. The board supports search, fi
 sorting, inline editing, adding and deleting rows, KPI totals and CSV export. Edits persist
 in the browser via localStorage; `data.json` is the seed data.
 
+Visual system: **obsidian** — restrained dark operator site with precise edge lighting.
+
 ## Run it
 
 Open `index.html` in a browser, or serve the folder:
@@ -15,6 +17,22 @@ Open `index.html` in a browser, or serve the folder:
 ```bash
 npx serve .
 ```
+
+## Gmail + data
+
+The site ships with a three-step connection modal. Demo mode is honest: it stores state in
+`localStorage`, never contacts Google and never sends email. Production OAuth steps are in
+`CONNECT.md`.
+
+## Automations
+
+- **Enquiry → Gmail draft** (demo) — Summarise the enquiry and create a Gmail draft reply with the next step. _Guard: Draft only. You read it, edit it, and press send._
+- **Lead triage** (demo) — Score fit, tag the request, and write the record into the data board. _Guard: No record is deleted; every change is logged._
+- **Follow-up sequence** (demo) — Prepare three short follow-up drafts with the original context attached. _Guard: You approve each draft. The sequence stops the moment the client replies._
+- **Weekly operator report** (production) — Summarise enquiries, bookings, failed checks and open follow-ups into one message. _Guard: Internal message to you only._
+- **Live delivery check** (production) — Fetch the live site and every asset, then record HTTP status and response time. _Guard: Read-only. Alerts on failure; never changes the site._
+- **Data snapshot** (production) — Export the current board to a dated CSV so nothing lives in one place. _Guard: Local file only. No third-party upload._
+- **Threshold alert** (demo) — Flag the row, write a note, and prepare an internal alert. _Guard: Internal alert only. No supplier is contacted automatically._
 
 ## Deploy free
 
@@ -28,8 +46,9 @@ npx serve .
 - `app.html` - the working data board
 - `data-app.js` - board behaviour
 - `data.json` - seed records
-- `styles.css` - all styling
-- `app.js` - navigation, form and reveal animations
+- `styles.css` - all styling (including the obsidian design system)
+- `app.js` - navigation, form, connection modal and reveal animations
 - `content.json` - the copy and structure as data
+- `CONNECT.md` - Gmail + data setup in demo and production
 - `site.json` - metadata used by the BotLancer delivery check
 - `check.html` - public check page that proves this build is live

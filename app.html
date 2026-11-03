@@ -1,14 +1,17 @@
 <!doctype html>
-<html lang="en" data-botlancer-site="b50628d6-42dd-486c-b1a9-6d5d6f8be215" data-mode="data" data-build="2026-11-02T09:00:26.027Z">
+<html lang="en" data-botlancer-site="b50628d6-42dd-486c-b1a9-6d5d6f8be215" data-mode="data" data-design="obsidian" data-build="2026-11-03T06:02:24.105Z">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Inventory Tracker For A Furniture Wareho — Data Board</title>
 <meta name="description" content="Inventory Tracker For A Furniture Wareho — every record in one clear board.">
+<meta name="theme-color" content="#07070a">
+<meta name="robots" content="index,follow">
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body class="app-body">
-<div class="app-top">
+<a class="skip-link" href="#top">Skip to content</a>
+<div class="app-top" id="top">
   <div class="left">
     <span class="mark">I</span>
     <div>
@@ -18,6 +21,7 @@
   </div>
   <div class="app-actions">
     <a class="back" href="./index.html">← Back to site</a>
+    <button class="btn btn-ghost" id="connect-btn" type="button">Connect Gmail &amp; data</button>
     <button class="btn btn-ghost" id="export-btn" type="button">Export CSV</button>
     <button class="btn btn-primary" id="add-btn" type="button">Add record</button>
   </div>
@@ -61,11 +65,73 @@
 </main>
 
 <div class="toast" id="toast"></div>
+<div class="modal-overlay" id="connect-modal" role="dialog" aria-modal="true" aria-labelledby="connect-title" aria-hidden="true" data-key="botlancer:connect:b50628d6-42dd-486c-b1a9-6d5d6f8be215">
+  <div class="modal" role="document">
+    <div class="modal-head">
+      <div>
+        <h2 id="connect-title">Connect Gmail + your data</h2>
+        <p>Three short steps. Demo mode is honest by default: nothing leaves this browser and no email is ever sent.</p>
+      </div>
+      <button class="modal-close" id="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+
+    <div class="modal-steps" id="modal-steps">
+      <div class="modal-step on" data-step="1"><b>1 · Gmail</b>Draft-ready connection</div>
+      <div class="modal-step" data-step="2"><b>2 · Data</b>Import or connect</div>
+      <div class="modal-step" data-step="3"><b>3 · Setup</b>Runbook + handover</div>
+    </div>
+
+    <div class="connect-block">
+      <h3>1. Gmail — drafts only</h3>
+      <p class="help">Enter the inbox that should receive enquiries. Demo mode stores the address here, in this browser, so the flow can be shown in seconds.</p>
+      <form class="connect-field" id="gmail-form" novalidate>
+        <input type="email" id="gmail-email" placeholder="you@company.com" autocomplete="email" aria-label="Gmail address">
+        <button class="btn btn-primary" type="submit">Save demo connection</button>
+      </form>
+      <div class="status-line" id="gmail-status">Not connected yet.</div>
+    </div>
+
+    <div class="connect-block">
+      <h3>2. Data — CSV, JSON or sample</h3>
+      <p class="help">Drop an export to preview your own numbers. The file never leaves your browser; only the row count and filename are remembered.</p>
+      <div class="connect-field">
+        <input type="file" id="data-file" accept=".csv,.json,text/csv,application/json" aria-label="Import CSV or JSON">
+        <button class="btn btn-ghost" id="data-sample" type="button">Use sample data</button>
+      </div>
+      <div class="status-line" id="data-status">Using the labelled sample data that ships with this build.</div>
+    </div>
+
+    <div class="connect-block">
+      <h3>3. Finish setup</h3>
+      <p class="help">This marks the walkthrough complete and shows what is ready. Production credentials are never requested on a public page.</p>
+      <div class="status-line" id="setup-status">Connect Gmail and data to complete the walkthrough.</div>
+      <details class="prod-box">
+        <summary>How production Gmail actually works (for the operator)</summary>
+        <ol>
+          <li>Create a Google Cloud project and enable the Gmail API.</li>
+          <li>Create an OAuth 2.0 client (Web application) and add the production redirect URI.</li>
+          <li>Request scopes <code>gmail.readonly</code> and <code>gmail.compose</code> only.</li>
+          <li>Store the client ID and secret on the server — never in this page.</li>
+          <li>BotLancer creates a draft for every enquiry. A human must press send.</li>
+        </ol>
+        <p>Full steps ship in <code>CONNECT.md</code> with this build.</p>
+      </details>
+    </div>
+
+    <div class="modal-note">Demo mode disclosure: this page stores connection state in <code>localStorage</code> under <code>botlancer:connect:b50628d6-42dd-486c-b1a9-6d5d6f8be215</code>. It does not contact Google, does not transmit the address, and cannot send email. Clearing site data removes it.</div>
+
+    <div class="modal-foot">
+      <button class="link-btn" id="connect-reset" type="button">Reset demo connection</button>
+      <button class="btn btn-primary" id="modal-done" type="button">Done</button>
+    </div>
+  </div>
+</div>
 <script>
 window.__BL_COLUMNS__ = [{"key":"item","label":"Item","type":"text"},{"key":"sku","label":"SKU","type":"text"},{"key":"stock","label":"Stock","type":"number"},{"key":"reorder","label":"Reorder at","type":"number"},{"key":"supplier","label":"Supplier","type":"text"},{"key":"status","label":"Status","type":"select"}];
 window.__BL_DATA__ = {"rows":[{"item":"Desk lamp","sku":"LMP-101","stock":42,"reorder":10,"supplier":"Aster Supply","status":"In stock","id":1},{"item":"Oak chair","sku":"CHR-204","stock":8,"reorder":12,"supplier":"Beacon Works","status":"Low","id":2},{"item":"Monitor arm","sku":"ARM-330","stock":0,"reorder":6,"supplier":"Aster Supply","status":"Out","id":3},{"item":"Cable kit","sku":"CBL-012","stock":120,"reorder":25,"supplier":"Northline","status":"In stock","id":4},{"item":"Shelf unit","sku":"SHF-077","stock":16,"reorder":8,"supplier":"Beacon Works","status":"In stock","id":5},{"item":"Foot rest","sku":"FTR-055","stock":5,"reorder":10,"supplier":"Northline","status":"Ordered","id":6},{"item":"Waste bin","sku":"BIN-019","stock":64,"reorder":20,"supplier":"Aster Supply","status":"In stock","id":7},{"item":"Whiteboard","sku":"WBD-140","stock":3,"reorder":5,"supplier":"Beacon Works","status":"Low","id":8},{"item":"Pen pack","sku":"PEN-500","stock":240,"reorder":50,"supplier":"Northline","status":"In stock","id":9},{"item":"Laptop stand","sku":"STD-222","stock":21,"reorder":8,"supplier":"Aster Supply","status":"In stock","id":10}],"columns":[{"key":"item","label":"Item","type":"text"},{"key":"sku","label":"SKU","type":"text"},{"key":"stock","label":"Stock","type":"number"},{"key":"reorder","label":"Reorder at","type":"number"},{"key":"supplier","label":"Supplier","type":"text"},{"key":"status","label":"Status","type":"select"}],"statuses":["In stock","Low","Out","Ordered","Archived"]};
 window.__BL_KEY__ = 'botlancer:data:b50628d6-42dd-486c-b1a9-6d5d6f8be215';
 </script>
 <script src="./data-app.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>
