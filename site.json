@@ -9,10 +9,7 @@
     "summary": "restrained dark operator site with precise edge lighting",
     "variant": "v2"
   },
-  "valueStack": {
-    "total": 31300,
-    "deal": 10000
-  },
+  "edition": "private",
   "automations": [
     {
       "id": "lead-draft",
@@ -50,7 +47,5 @@
       "mode": "demo"
     }
   ],
-  "leadId": null,
-  "value": 10000,
-  "generatedAt": "2026-11-03T06:17:30.324Z"
+  "generatedAt": "2026-11-03T11:00:21.544Z"
 }
